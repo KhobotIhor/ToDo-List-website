@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>ToDo</title>
+</head>
+<body>
+    <div class="container py-3">
+  <header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+        <span class="fs-4">ToDo</span>
+      </a>
+    </div>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-4 fw-normal text-body-emphasis">Your ToDo</h1>
+      <p class="fs-5 text-body-secondary">Organize yourself with ToDo</p>
+    </div>
+  </header>
+      <form action='/', method="post">
+	{{form.csrf_token}}
+	{{form.action.label}} {{form.action(size=SIZE)}}
+        {{form.submit(size=SIZE)}}
+</form>
+      <br>
+      <br>
+  <main>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        {%for action in actions%}
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">Action {{action.id}}</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title">{{action.action}}</h1>
+
+            <a href='/delete/{{action.id}}' type="button" class="w-100 btn btn-lg btn-outline-primary">Done</a>
+          </div>
+        </div>
+      </div>
+        {%endfor%}
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
